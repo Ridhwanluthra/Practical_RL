@@ -355,6 +355,15 @@ def plot_graph_with_state_values(mdp, state_values):
                    label=str(state_node) + '\n' + 'V =' + str(value)[:4])
     return display(graph)
 
+def get_action_value(mdp, state_values, state, action, gamma):
+    """ Computes Q(s,a) as in formula above """
+
+    # YOUR CODE HERE
+    q = 0
+    for each in mdp.get_all_states():
+        q += mdp.get_transition_prob(state, action, each) * (mdp.get_reward(state, action, each) + gamma * state_values[each])
+
+    return q
 
 def get_optimal_action_for_plot(mdp, state_values, state, gamma=0.9):
     """ Finds optimal action using formula above. """
@@ -365,8 +374,7 @@ def get_optimal_action_for_plot(mdp, state_values, state, gamma=0.9):
     optimal_action = next_actions[np.argmax(q_values)]
     return optimal_action
 
-
-def plot_graph_optimal_strategy_and_state_values(mdp, state_values):
+def plot_graph_optimal_strategy_and_state_values(mdp, state_values, gamma=0.9):
     """ Plot graph with state values and """
     graph = plot_graph(mdp)
     opt_s_a_edge_attrs = {'style': 'bold',
@@ -386,3 +394,24 @@ def plot_graph_optimal_strategy_and_state_values(mdp, state_values):
                 graph.edge(state_node, state_node + "-" + action,
                            **opt_s_a_edge_attrs)
     return display(graph)
+
+# def plot_graph_optimal_strategy_and_state_values(mdp, state_values):
+#     """ Plot graph with state values and """
+#     graph = plot_graph(mdp)
+#     opt_s_a_edge_attrs = {'style': 'bold',
+#                           'color': 'green',
+#                           'ratio': 'auto',
+#                           'penwidth': '6'}
+
+#     for state_node in mdp._transition_probs:
+#         value = state_values[state_node]
+#         graph.node(state_node,
+#                    label=str(state_node) + '\n' + 'V =' + str(value)[:4])
+#         for action in mdp.get_possible_actions(state_node):
+#             if action == get_optimal_action_for_plot(mdp,
+#                                                      state_values,
+#                                                      state_node,
+#                                                      gamma):
+#                 graph.edge(state_node, state_node + "-" + action,
+#                            **opt_s_a_edge_attrs)
+#     return display(graph)
