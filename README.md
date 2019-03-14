@@ -1,3 +1,8 @@
+# Reinforcement Learning HINDI MAE!
+### P.S. This entire talk is in English!
+
+This Is based largely on repository from which this is forked, its readme is given below
+
 # Practical_RL
 ** Announce - new HSE track will start in late january, YSDA soon after. Tons of changes incoming. We'll also fix all the issues :) **
 
